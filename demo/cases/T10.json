@@ -1,0 +1,88 @@
+{
+  "id": "T10",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T10",
+  "note": "",
+  "expected": {
+    "decision": "Decline",
+    "criteria": [
+      "pass",
+      "pass",
+      "unclear",
+      "fail",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-11T14:04:00+05:30",
+    "duration_sec": 220,
+    "caller_number": "+91 90000 00010",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "1BHK in Kharadi, about 550 sq ft. Kitchen and one bedroom. My budget is 1 to 1.5 lakh maximum."
+    },
+    {
+      "role": "agent",
+      "text": "Thank you for being upfront about that. I want to be honest: for a kitchen and a bedroom with full execution, that would be well below what a project of that scope involves with us. I wouldn't want you to come in and be disappointed."
+    },
+    {
+      "role": "caller",
+      "text": "Okay, thank you for being straight."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "phone": "+91 90000 00010"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "1BHK",
+      "carpet_area_sqft": 550,
+      "location_text": "Kharadi",
+      "locality": "Kharadi",
+      "zone": "pune_city",
+      "scope_rooms": [
+        "kitchen",
+        "bedroom"
+      ],
+      "execution_wanted": true
+    },
+    "budget": {
+      "volunteered": true,
+      "caller_words": "1 to 1.5 lakh maximum for everything"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Kitchen + bedroom with execution"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Kharadi (Pune city)"
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": "Not discussed"
+      },
+      "c4_budget": {
+        "result": "fail",
+        "evidence": "Volunteered budget clearly below scope"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Not raised"
+      }
+    },
+    "decision": "Decline",
+    "reason_code": "budget_misaligned",
+    "reason": "Volunteered budget clearly below a kitchen + bedroom with execution.",
+    "flags": []
+  }
+}

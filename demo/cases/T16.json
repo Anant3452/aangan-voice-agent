@@ -1,0 +1,90 @@
+{
+  "id": "T16",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T16",
+  "note": "Repeat caller never followed up. Timeline was never discussed, so criterion 3 is unclear and the decision is Ask. Because of the repeat-caller flag the alert ALSO goes to Nikhil's urgent chat.",
+  "expected": {
+    "decision": "Ask",
+    "criteria": [
+      "pass",
+      "pass",
+      "unclear",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-19T10:38:00+05:30",
+    "duration_sec": 318,
+    "caller_number": "+91 90000 00016",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I called on Monday about a project. Someone said they'd get back to me. It's been days."
+    },
+    {
+      "role": "agent",
+      "text": "I'm really sorry, you shouldn't have had to call twice. Let me make sure that doesn't happen again."
+    },
+    {
+      "role": "caller",
+      "text": "Girish Nair. 3BHK in Viman Nagar."
+    },
+    {
+      "role": "agent",
+      "text": "When would you need the project complete?"
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": "Girish Nair",
+      "phone": "+91 90000 00016"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "3BHK",
+      "location_text": "Viman Nagar",
+      "locality": "Viman Nagar",
+      "zone": "pune_city",
+      "execution_wanted": true
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "3BHK project"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Viman Nagar"
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": "Never discussed"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Not raised"
+      }
+    },
+    "decision": "Ask",
+    "reason_code": "criteria_unclear",
+    "reason": "Repeat caller (Monday enquiry never followed up); timeline not established.",
+    "flags": [
+      "repeat_caller_no_followup",
+      "frustrated_caller"
+    ],
+    "uncertainties": [
+      "Scope not captured in detail",
+      "Timeline: ask when they need it complete"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+.venv/
+.env
+.vercel/
+data/*.db
+data/outbox.log
+data/digests/
+data/captured_*.json
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+.vercel
+.env*

@@ -1,0 +1,118 @@
+{
+  "id": "T05",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T05",
+  "note": "",
+  "expected": {
+    "decision": "Book",
+    "criteria": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-05T10:52:00+05:30",
+    "duration_sec": 404,
+    "caller_number": "+91 90000 00005",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "This is Aarti Mehta. Vikram Agarwal asked me to call; he's a close friend of Nikhil's."
+    },
+    {
+      "role": "caller",
+      "text": "4BHK in Koregaon Park, about 2,400 sq ft carpet. Complete redesign. We've moved out temporarily."
+    },
+    {
+      "role": "agent",
+      "text": "When would you need it complete?"
+    },
+    {
+      "role": "caller",
+      "text": "Move back by February."
+    },
+    {
+      "role": "agent",
+      "text": "Would you prefer a site visit?"
+    },
+    {
+      "role": "caller",
+      "text": "Yes please."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": "Aarti Mehta",
+      "relationship_to_property": "owner",
+      "phone": "+91 90000 00005"
+    },
+    "source": {
+      "type": "referral",
+      "referrer_name": "Vikram Agarwal",
+      "detail": "Close friend of Nikhil"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "4BHK",
+      "carpet_area_sqft": 2400,
+      "area_basis": "carpet",
+      "location_text": "Koregaon Park",
+      "locality": "Koregaon Park",
+      "zone": "pune_city",
+      "scope_rooms": [
+        "flooring",
+        "kitchen",
+        "4 bedrooms"
+      ],
+      "scope_summary": "Complete redesign",
+      "execution_wanted": true,
+      "site_status": "vacant",
+      "timeline_text": "Move back in by February (~5 months)",
+      "target_completion": "2027-02"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Complete redesign"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Koregaon Park"
+      },
+      "c3_timeline": {
+        "result": "pass",
+        "evidence": "February"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Owner; moved out for the work"
+      }
+    },
+    "decision": "Book",
+    "reason_code": "qualified",
+    "reason": "4BHK Koregaon Park complete redesign; personal referral via Nikhil's friend.",
+    "consultation": {
+      "slot_text": "Tue 9 Sep, 11:00 am",
+      "mode": "site_visit"
+    },
+    "flags": [
+      "referral",
+      "vip_referral",
+      "site_visit_requested"
+    ],
+    "uncertainties": [],
+    "designer_brief": "VIP: referred by Vikram Agarwal (Nikhil's friend). 2,400 sq ft 4BHK in Koregaon Park, vacant, complete redesign incl. flooring. Back in by February."
+  }
+}

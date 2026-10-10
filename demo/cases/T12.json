@@ -1,0 +1,101 @@
+{
+  "id": "T12",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T12",
+  "note": "",
+  "expected": {
+    "decision": "Book",
+    "criteria": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-15T10:05:00+05:30",
+    "duration_sec": 450,
+    "caller_number": "+91 90000 00012",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "Anand Sharma. Villa in Kalyani Nagar, about 5,500 sq ft, ground plus two. Full end-to-end design."
+    },
+    {
+      "role": "caller",
+      "text": "New construction, possession last month, completely empty. March next year to move in."
+    },
+    {
+      "role": "agent",
+      "text": "Would you like a site visit for the first consultation?"
+    },
+    {
+      "role": "caller",
+      "text": "Yes, this week or next."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": "Anand Sharma",
+      "relationship_to_property": "owner",
+      "phone": "+91 90000 00012"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "villa",
+      "carpet_area_sqft": 5500,
+      "area_basis": "unknown",
+      "location_text": "Kalyani Nagar",
+      "locality": "Kalyani Nagar",
+      "zone": "pune_city",
+      "scope_summary": "Full end-to-end design, G+2",
+      "execution_wanted": true,
+      "site_status": "vacant",
+      "ownership": "owned",
+      "timeline_text": "Move in March next year, no rush",
+      "target_completion": "2027-03"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Full end-to-end"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Kalyani Nagar"
+      },
+      "c3_timeline": {
+        "result": "pass",
+        "evidence": "March"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Owner"
+      }
+    },
+    "decision": "Book",
+    "reason_code": "qualified",
+    "reason": "5,500 sq ft new villa in Kalyani Nagar, full design, March move-in.",
+    "consultation": {
+      "slot_text": "Thu 18 Sep, 11:00 am",
+      "mode": "site_visit",
+      "caller_constraints": "This week or next"
+    },
+    "flags": [
+      "site_visit_requested"
+    ],
+    "uncertainties": [
+      "Carpet vs built-up not confirmed"
+    ],
+    "designer_brief": "Big one: 5,500 sq ft G+2 villa in Kalyani Nagar, new and empty. Full design. Move in March. Wants principal designer on site."
+  }
+}

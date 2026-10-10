@@ -1,0 +1,103 @@
+{
+  "id": "T15",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T15",
+  "note": "",
+  "expected": {
+    "decision": "Book",
+    "criteria": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-18T15:12:00+05:30",
+    "duration_sec": 344,
+    "caller_number": "+91 90000 00015",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I'm Smita. Possession of my Undri flat in about six weeks. 2BHK, 875 sq ft. Want to start design now."
+    },
+    {
+      "role": "caller",
+      "text": "Full home: kitchen, wardrobes, living room."
+    },
+    {
+      "role": "caller",
+      "text": "My husband said go ahead and book."
+    },
+    {
+      "role": "caller",
+      "text": "The builder will let us in to see the site now."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": "Smita",
+      "relationship_to_property": "co_owner",
+      "phone": "+91 90000 00015"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "2BHK",
+      "carpet_area_sqft": 875,
+      "location_text": "Undri",
+      "locality": "Undri",
+      "zone": "pune_city",
+      "scope_rooms": [
+        "kitchen",
+        "wardrobes",
+        "living room"
+      ],
+      "scope_summary": "Full home",
+      "execution_wanted": true,
+      "site_status": "possession_pending",
+      "ownership": "owned",
+      "timeline_text": "Possession in ~6 weeks; start design now",
+      "site_available_from": "late Oct 2026"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Full home"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Undri"
+      },
+      "c3_timeline": {
+        "result": "pass",
+        "evidence": "Design before possession; no tight deadline"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Co-owner; husband said go ahead"
+      }
+    },
+    "decision": "Book",
+    "reason_code": "qualified",
+    "reason": "Undri 2BHK full home; design during the 6 weeks before possession.",
+    "consultation": {
+      "slot_text": "Sat 20 Sep, 10:30 am",
+      "mode": "site_visit"
+    },
+    "flags": [
+      "site_visit_requested"
+    ],
+    "uncertainties": [],
+    "designer_brief": "875 sq ft 2BHK in Undri, possession in ~6 weeks; builder allows site access now. Full home. Design phase can overlap with possession."
+  }
+}

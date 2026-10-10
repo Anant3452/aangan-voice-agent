@@ -1,0 +1,84 @@
+{
+  "id": "T04",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T04",
+  "note": "",
+  "expected": {
+    "decision": "Decline",
+    "criteria": [
+      "fail",
+      "unclear",
+      "unclear",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-04T11:07:00+05:30",
+    "duration_sec": 202,
+    "caller_number": "+91 90000 00004",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "Can someone come and give us ideas for our living room? Colours, furniture arrangement. Not the full thing."
+    },
+    {
+      "role": "agent",
+      "text": "Just so I point you to the right person: are you looking for us to design and execute the work, or more for ideas and advice?"
+    },
+    {
+      "role": "caller",
+      "text": "No, we're just exploring for now."
+    },
+    {
+      "role": "agent",
+      "text": "We're a full-service studio. Every project includes design and execution together, so we don't do advice-only visits. If you decide to go for a full redesign, we'd love to hear from you."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "phone": "+91 90000 00004"
+    },
+    "project": {
+      "segment": "residential",
+      "scope_rooms": [
+        "living room"
+      ],
+      "scope_summary": "Ideas only",
+      "execution_wanted": false
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "fail",
+        "evidence": "Just wants suggestions, no execution"
+      },
+      "c2_service_area": {
+        "result": "unclear",
+        "evidence": "Not discussed"
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": "Not discussed"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Not raised"
+      }
+    },
+    "decision": "Decline",
+    "reason_code": "advice_only",
+    "reason": "Wants ideas and advice only, no execution.",
+    "flags": [
+      "nurture_later"
+    ]
+  }
+}

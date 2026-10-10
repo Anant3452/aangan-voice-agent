@@ -1,0 +1,97 @@
+{
+  "id": "T17",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T17",
+  "note": "",
+  "expected": {
+    "decision": "Book",
+    "criteria": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-22T14:16:00+05:30",
+    "duration_sec": 270,
+    "caller_number": "+91 90000 00017",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I called just now and got cut off. Ritu Kapoor, Pimple Saudagar. 3BHK, about 1,050 sq ft."
+    },
+    {
+      "role": "agent",
+      "text": "No problem at all, let's continue. Pimple Saudagar is in our area."
+    },
+    {
+      "role": "caller",
+      "text": "Kitchen, wardrobes, living room. Builder furniture is very basic. Ideally done by March."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": "Ritu Kapoor",
+      "relationship_to_property": "owner",
+      "phone": "+91 90000 00017"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "3BHK",
+      "carpet_area_sqft": 1050,
+      "location_text": "Pimple Saudagar",
+      "locality": "Pimple Saudagar",
+      "zone": "pcmc",
+      "scope_rooms": [
+        "kitchen",
+        "wardrobes",
+        "living room"
+      ],
+      "execution_wanted": true,
+      "site_status": "occupied",
+      "timeline_text": "Ideally done by March",
+      "target_completion": "2027-03"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Kitchen, wardrobes, living"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Pimple Saudagar (PCMC)"
+      },
+      "c3_timeline": {
+        "result": "pass",
+        "evidence": "By March"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Lives there; not raised"
+      }
+    },
+    "decision": "Book",
+    "reason_code": "qualified",
+    "reason": "Pimple Saudagar 3BHK, standard full-home scope, March.",
+    "consultation": {
+      "slot_text": "Wed 24 Sep, 4:00 pm",
+      "mode": "site_visit"
+    },
+    "flags": [
+      "dropped_call"
+    ],
+    "uncertainties": [],
+    "designer_brief": "Ritu Kapoor, 1,050 sq ft 3BHK in Pimple Saudagar, lived in 2 yrs with builder furniture. Kitchen, wardrobes, living. By March."
+  }
+}

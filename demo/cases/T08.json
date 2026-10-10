@@ -1,0 +1,93 @@
+{
+  "id": "T08",
+  "source": "SIMULATED: the real call was missed (see note)",
+  "note": "The real T08 was a MISSED call at 10:47pm (Nanded City number, no voicemail, call-back failed). This case shows what the agent would have done. Every project detail below is INVENTED for the demo.",
+  "expected": {
+    "decision": "Book",
+    "criteria": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-09T22:47:00+05:30",
+    "duration_sec": 300,
+    "caller_number": "+91 90000 00008",
+    "answer_delay_sec": 2
+  },
+  "transcript": [
+    {
+      "role": "agent",
+      "text": "Hello, Aangan Studio, this is the studio's virtual assistant. Calls are recorded. How can I help?"
+    },
+    {
+      "role": "caller",
+      "text": "[simulated] 2BHK in Nanded City, full interiors, possession done, want it done in about four months."
+    },
+    {
+      "role": "agent",
+      "text": "Nanded City's right next to Shivane and Warje, so we cover it. Shall I book a consultation?"
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": "[simulated caller]",
+      "phone": "+91 90000 00008"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "2BHK",
+      "location_text": "Nanded City, Sinhagad Road",
+      "locality": "Nanded City",
+      "zone": "pune_city",
+      "scope_summary": "Full interiors",
+      "execution_wanted": true,
+      "site_status": "vacant",
+      "timeline_text": "About four months"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Full interiors"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Nanded City (adjoining Shivane/Warje)"
+      },
+      "c3_timeline": {
+        "result": "pass",
+        "evidence": "~4 months"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Not raised"
+      }
+    },
+    "decision": "Book",
+    "reason_code": "qualified",
+    "reason": "After-hours call: Nanded City 2BHK full interiors (simulated details).",
+    "consultation": {
+      "slot_text": "Sat 13 Sep, 10:30 am",
+      "mode": "site_visit"
+    },
+    "flags": [
+      "after_hours",
+      "service_area_edge"
+    ],
+    "uncertainties": [
+      "Nanded City on the edge of the service area; confirm before the visit"
+    ],
+    "designer_brief": "SIMULATED DEMO LEAD. After-hours call, 2BHK in Nanded City, full interiors, ~4 months."
+  }
+}

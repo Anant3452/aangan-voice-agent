@@ -1,0 +1,73 @@
+{
+  "id": "T19",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T19",
+  "note": "",
+  "expected": {
+    "decision": "Decline",
+    "criteria": [
+      "fail",
+      "pass",
+      "unclear",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-24T16:02:00+05:30",
+    "duration_sec": 170,
+    "caller_number": "+91 90000 00019",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I'm opening a restaurant in Koregaon Park. Would you design the interiors?"
+    },
+    {
+      "role": "agent",
+      "text": "Those spaces have very specific requirements, compliance, equipment and materials, that need a specialist. We focus on homes and offices, so we wouldn't be the right fit."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "phone": "+91 90000 00019"
+    },
+    "project": {
+      "segment": "commercial",
+      "property_type": "restaurant",
+      "location_text": "Koregaon Park",
+      "locality": "Koregaon Park",
+      "zone": "pune_city"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "fail",
+        "evidence": "Restaurant: a project type we don't do"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Koregaon Park"
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": "Not discussed"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Owner"
+      }
+    },
+    "decision": "Decline",
+    "reason_code": "out_of_scope_type",
+    "reason": "Restaurant interiors are out of scope.",
+    "flags": []
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "id": "T09",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T09",
+  "note": "",
+  "expected": {
+    "decision": "Escalate",
+    "criteria": [
+      "not_assessed",
+      "not_assessed",
+      "not_assessed",
+      "not_assessed",
+      "not_assessed"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-10T11:32:00+05:30",
+    "duration_sec": 352,
+    "caller_number": "+91 90000 00009",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "My project has been going for three months and my designer hasn't replied in five days."
+    },
+    {
+      "role": "agent",
+      "text": "I'm really sorry, that's not the experience we want you to have. Let me get this to the right person right now."
+    },
+    {
+      "role": "caller",
+      "text": "Sheetal Deshpande. Designer is Aryan. 2BHK in Viman Nagar. Three messages, two calls."
+    },
+    {
+      "role": "agent",
+      "text": "Would you like a call back from Nikhil or a senior member of the team?"
+    },
+    {
+      "role": "caller",
+      "text": "Nikhil or a senior person, not just whoever picks up."
+    },
+    {
+      "role": "agent",
+      "text": "Understood. Someone senior will call you back within 15 minutes."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "existing_client_complaint",
+    "caller": {
+      "name": "Sheetal Deshpande",
+      "phone": "+91 90000 00009"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "not_assessed",
+        "evidence": null
+      },
+      "c2_service_area": {
+        "result": "not_assessed",
+        "evidence": null
+      },
+      "c3_timeline": {
+        "result": "not_assessed",
+        "evidence": null
+      },
+      "c4_budget": {
+        "result": "not_assessed",
+        "evidence": null
+      },
+      "c5_decision_maker": {
+        "result": "not_assessed",
+        "evidence": null
+      }
+    },
+    "decision": "Escalate",
+    "reason_code": "existing_client_complaint",
+    "reason": "Existing client: designer unresponsive for 5 days.",
+    "escalation": {
+      "urgency": "urgent",
+      "issue_summary": "Project 3 months in; designer Aryan hasn't replied in 5 days",
+      "client_name": "Sheetal Deshpande",
+      "project_location": "2BHK, Viman Nagar",
+      "assigned_designer": "Aryan",
+      "already_tried": "3 messages, 2 calls",
+      "callback_requested_from": "Nikhil or a senior person",
+      "promised_callback": "Senior callback within 15 minutes"
+    },
+    "flags": [
+      "frustrated_caller",
+      "human_callback_requested"
+    ]
+  }
+}

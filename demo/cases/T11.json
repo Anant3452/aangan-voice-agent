@@ -1,0 +1,99 @@
+{
+  "id": "T11",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T11",
+  "note": "The front desk booked without ever asking about timeline. Under qualified.md criterion 3 is unclear, so the agent asks once. The transcript doesn't contain an answer, so the honest mock result is Ask.",
+  "expected": {
+    "decision": "Ask",
+    "criteria": [
+      "pass",
+      "pass",
+      "unclear",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-12T10:18:00+05:30",
+    "duration_sec": 382,
+    "caller_number": "+91 90000 00011",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I'm in a rented 2BHK in Baner, 3-year lease. Living room, bedroom and kitchen, no structural changes."
+    },
+    {
+      "role": "agent",
+      "text": "Rented homes are fine as long as nothing structural is done. Have you checked with your landlord?"
+    },
+    {
+      "role": "caller",
+      "text": "Yes, fine as long as we don't break walls."
+    },
+    {
+      "role": "agent",
+      "text": "When would you need the project complete?"
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "relationship_to_property": "tenant",
+      "phone": "+91 90000 00011"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "2BHK",
+      "location_text": "Baner",
+      "locality": "Baner",
+      "zone": "pune_city",
+      "scope_rooms": [
+        "living room",
+        "bedroom",
+        "kitchen"
+      ],
+      "scope_summary": "Design + fittings, all reversible",
+      "execution_wanted": true,
+      "site_status": "occupied",
+      "ownership": "rented",
+      "structural_changes_requested": false
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Three rooms with execution"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Baner"
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": "Never discussed"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Tenant with landlord approval"
+      }
+    },
+    "decision": "Ask",
+    "reason_code": "criteria_unclear",
+    "reason": "Rented Baner 2BHK, good fit, but completion timeline not established.",
+    "flags": [
+      "rented_property"
+    ],
+    "uncertainties": [
+      "Timeline: ask when they need it complete"
+    ],
+    "designer_brief": "Tenant, 3-year lease, 2BHK Baner, landlord OK with non-structural work. Living, bedroom, kitchen."
+  }
+}

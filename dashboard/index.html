@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aangan Enquiries</title>
+<style>
+/* ═════════════ Tokens ═════════════ */
+:root {
+  color-scheme: light;
+  --page: #f6f5f1; --surface: #ffffff; --surface-2: #faf9f6; --border: rgba(20,18,14,0.09);
+  --ink: #17150f; --ink-2: #57544c; --muted: #8b877d;
+  --grid: #ebe9e2; --axis: #cfccc2; --wash: #f0eee8;
+  --brand: #b4532a; --brand-ink: #ffffff; --brand-soft: #f7e7de;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4;
+  --seq1: #1c5cab; --seq2: #2a78d6; --seq3: #5598e7; --seq4: #86b6ef; --seq5: #b7d3f6;
+  --good: #0ca30c; --good-ink: #0b6b0b; --good-bg: #e6f4e4;
+  --warn: #fab219; --warn-ink: #8a5a00; --warn-bg: #fdf1d6;
+  --crit: #d03b3b; --crit-ink: #a52626; --crit-bg: #fbe5e3;
+  --neutral-bg: #efeee9; --neutral-ink: #57544c;
+  --shadow: 0 1px 2px rgba(20,18,14,.04), 0 4px 16px rgba(20,18,14,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0f0f0e; --surface: #1a1a19; --surface-2: #20201e; --border: rgba(255,255,255,0.08);
+    --ink: #f5f4ef; --ink-2: #c3c2b7; --muted: #8f8c83;
+    --grid: #2a2a28; --axis: #3a3a37; --wash: #252523;
+    --brand: #e07a4f; --brand-ink: #1a0f0a; --brand-soft: #3a2419;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181;
+    --seq1: #86b6ef; --seq2: #5598e7; --seq3: #3987e5; --seq4: #256abf; --seq5: #184f95;
+    --good-ink: #4cc94c; --good-bg: #16301a; --warn-ink: #f5c04a; --warn-bg: #3a2e12;
+    --crit-ink: #f07a7a; --crit-bg: #3d1c1c; --neutral-bg: #2a2a28; --neutral-ink: #c3c2b7;
+    --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0f0f0e; --surface: #1a1a19; --surface-2: #20201e; --border: rgba(255,255,255,0.08);
+  --ink: #f5f4ef; --ink-2: #c3c2b7; --muted: #8f8c83;
+  --grid: #2a2a28; --axis: #3a3a37; --wash: #252523;
+  --brand: #e07a4f; --brand-ink: #1a0f0a; --brand-soft: #3a2419;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181;
+  --seq1: #86b6ef; --seq2: #5598e7; --seq3: #3987e5; --seq4: #256abf; --seq5: #184f95;
+  --good-ink: #4cc94c; --good-bg: #16301a; --warn-ink: #f5c04a; --warn-bg: #3a2e12;
+  --crit-ink: #f07a7a; --crit-bg: #3d1c1c; --neutral-bg: #2a2a28; --neutral-ink: #c3c2b7;
+  --shadow: none;
+}
+
+/* ═════════════ Base ═════════════ */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+body { margin: 0; background: var(--page); color: var(--ink);
+       font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+button, input, select { font: inherit; color: inherit; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+.muted { color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ═════════════ Top bar ═════════════ */
+.top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--page) 88%, transparent);
+       backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--border); }
+.top .wrap { display: flex; align-items: center; gap: 16px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+.mark { width: 34px; height: 34px; border-radius: 10px; background: var(--brand); color: var(--brand-ink);
+        display: grid; place-items: center; font-weight: 700; font-size: 17px; }
+.brand h1 { font-size: 16px; margin: 0; line-height: 1.2; }
+.brand .sub { font-size: 12px; color: var(--muted); }
+.live { display: inline-flex; align-items: center; gap: 6px; }
+.live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 3px var(--good-bg); }
+.controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.seg { display: inline-flex; background: var(--wash); border-radius: 10px; padding: 3px; }
+.seg button { border: 0; background: transparent; padding: 5px 11px; border-radius: 8px; cursor: pointer; color: var(--ink-2); font-size: 13px; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); font-weight: 600; }
+.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); background: var(--surface);
+       padding: 6px 12px; border-radius: 9px; cursor: pointer; text-decoration: none; font-size: 13px; }
+.btn:hover { background: var(--wash); }
+.btn.primary { background: var(--brand); color: var(--brand-ink); border-color: transparent; font-weight: 600; }
+.btn.primary:hover { filter: brightness(1.05); }
+.btn.icon { padding: 6px 9px; }
+.switch { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--ink-2); cursor: pointer; user-select: none; }
+.switch input { appearance: none; width: 30px; height: 18px; border-radius: 9px; background: var(--axis); position: relative; cursor: pointer; transition: background .15s; margin: 0; }
+.switch input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: transform .15s; }
+.switch input:checked { background: var(--brand); }
+.switch input:checked::after { transform: translateX(12px); }
+nav.tabs { display: flex; gap: 4px; padding-bottom: 8px; overflow-x: auto; scrollbar-width: none; }
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs a { text-decoration: none; padding: 6px 12px; border-radius: 8px; color: var(--ink-2); font-size: 13px; white-space: nowrap; }
+nav.tabs a:hover { background: var(--wash); }
+nav.tabs a.on { background: var(--brand-soft); color: var(--brand); font-weight: 600; }
+.banner { background: var(--warn-bg); color: var(--warn-ink); font-size: 12px; text-align: center; padding: 6px 16px; }
+
+/* ═════════════ Sections & cards ═════════════ */
+section { padding: 28px 0 8px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.sec-head h2 { font-size: 20px; margin: 0; letter-spacing: -0.01em; }
+.sec-head p { margin: 2px 0 0; color: var(--ink-2); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); min-width: 0; }
+.card h3 { font-size: 13px; margin: 0 0 4px; font-weight: 600; }
+.card .hint { font-size: 12px; color: var(--muted); margin: 0 0 14px; }
+.grid { display: grid; gap: 14px; }
+.g-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.g-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 960px) { .g-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .g-4 { grid-template-columns: 1fr; } }
+.mt { margin-top: 14px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; }
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
+.hero-main { background: linear-gradient(135deg, var(--brand) 0%, color-mix(in srgb, var(--brand) 70%, #000) 100%);
+             color: #fff; border: 0; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+.hero-main .eyebrow { font-size: 12px; opacity: .85; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+.hero-main .headline { font-size: 30px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 0; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.hero-stats div { background: rgba(255,255,255,.12); border-radius: 12px; padding: 10px 12px; }
+.hero-stats b { display: block; font-size: 22px; letter-spacing: -0.01em; }
+.hero-stats span { font-size: 12px; opacity: .85; }
+.compare { display: grid; grid-template-rows: auto 1fr; gap: 10px; }
+.cmp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cmp { border-radius: 12px; padding: 12px; }
+.cmp.before { background: var(--wash); }
+.cmp.after { background: var(--good-bg); }
+.cmp .lab { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; color: var(--muted); }
+.cmp.after .lab { color: var(--good-ink); }
+.cmp ul { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.cmp li { font-size: 13px; color: var(--ink-2); }
+.cmp li b { display: block; font-size: 18px; color: var(--ink); }
+
+/* KPI tiles */
+.kpi { display: flex; flex-direction: column; gap: 2px; }
+.kpi .k { font-size: 12px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+.kpi .ico { width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; background: var(--wash); font-size: 12px; }
+.kpi .v { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-top: 4px; }
+.kpi .n { font-size: 12px; color: var(--muted); }
+.meter { height: 6px; border-radius: 3px; background: var(--wash); margin-top: 8px; overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--s1); border-radius: 3px; }
+
+/* charts */
+.funnel { display: grid; gap: 8px; }
+.f-row { display: grid; grid-template-columns: 96px 1fr 28px 40px; align-items: center; gap: 8px; }
+.f-row .lab { font-size: 13px; color: var(--ink-2); }
+.f-row .bar { height: 22px; border-radius: 0 6px 6px 0; min-width: 4px; }
+.f-row .n { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.f-row .pc { font-size: 12px; color: var(--muted); text-align: right; }
+.stackbar { display: flex; height: 14px; gap: 2px; border-radius: 7px; overflow: hidden; margin: 6px 0 14px; }
+.stackbar div { height: 100%; min-width: 3px; }
+.legend-list { display: grid; gap: 8px; }
+.legend-list .it { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 10px; font-size: 13px; }
+.legend-list .it .c { color: var(--muted); font-size: 12px; width: 38px; text-align: right; }
+.hbar { display: grid; grid-template-columns: minmax(110px, 40%) 1fr 24px; gap: 10px; align-items: center; margin: 8px 0; font-size: 13px; }
+.hbar .lab { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hbar .track { height: 12px; background: var(--wash); border-radius: 0 6px 6px 0; }
+.hbar .fill { height: 100%; background: var(--s1); border-radius: 0 6px 6px 0; }
+.hbar .val { text-align: right; font-weight: 600; }
+.hours svg { display: block; width: 100%; height: 200px; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-2); margin-top: 8px; }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+/* pills */
+.pill { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.p-Book { background: var(--good-bg); color: var(--good-ink); }
+.p-Ask { background: var(--warn-bg); color: var(--warn-ink); }
+.p-Decline { background: var(--neutral-bg); color: var(--neutral-ink); }
+.p-Escalate { background: var(--crit-bg); color: var(--crit-ink); }
+.tag { display: inline-block; padding: 1px 8px; border-radius: 6px; background: var(--wash); color: var(--ink-2); font-size: 11px; font-weight: 600; margin-right: 4px; }
+.dots { display: inline-flex; gap: 3px; }
+.dot { width: 16px; height: 16px; border-radius: 5px; display: grid; place-items: center; font-size: 10px; font-weight: 700; }
+.d-pass { background: var(--good-bg); color: var(--good-ink); }
+.d-fail { background: var(--crit-bg); color: var(--crit-ink); }
+.d-unclear { background: var(--warn-bg); color: var(--warn-ink); }
+.d-not_assessed, .d-null { background: var(--wash); color: var(--muted); }
+
+/* attention */
+.att { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.att-card { border: 1px solid var(--border); border-left: 4px solid var(--warn); border-radius: 12px; padding: 12px; background: var(--surface-2); cursor: pointer; display: grid; gap: 6px; }
+.att-card.crit { border-left-color: var(--crit); }
+.att-card:hover { border-color: var(--axis); }
+.att-card .who { font-weight: 600; display: flex; justify-content: space-between; gap: 8px; }
+.att-card .why { font-size: 13px; color: var(--ink-2); }
+.empty { padding: 18px; text-align: center; color: var(--good-ink); background: var(--good-bg); border-radius: 12px; font-weight: 600; }
+
+/* table */
+.tbl-tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.search { flex: 1; min-width: 200px; max-width: 320px; border: 1px solid var(--border); background: var(--surface-2); border-radius: 9px; padding: 7px 11px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button { border: 1px solid var(--border); background: var(--surface); padding: 4px 11px; border-radius: 999px; font-size: 12px; cursor: pointer; color: var(--ink-2); }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--page); border-color: var(--ink); }
+.tbl-wrap { overflow-x: auto; margin: 0 -18px -18px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; padding: 10px 12px; border-bottom: 1px solid var(--grid); white-space: nowrap; background: var(--surface-2); }
+td { padding: 11px 12px; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+tbody tr { cursor: pointer; }
+tbody tr:hover td { background: var(--surface-2); }
+th:first-child, td:first-child { padding-left: 18px; } th:last-child, td:last-child { padding-right: 18px; }
+.who-cell b { display: block; font-weight: 600; }
+.who-cell span { font-size: 12px; color: var(--muted); }
+.reason { color: var(--ink-2); max-width: 340px; }
+
+/* costs */
+.cost-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 860px) { .cost-hero { grid-template-columns: 1fr; } }
+.big { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.big small { font-size: 14px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.slider { width: 100%; accent-color: var(--brand); margin: 10px 0 4px; }
+.kv { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; font-size: 13px; margin-top: 12px; }
+.kv dt { color: var(--ink-2); } .kv dd { margin: 0; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.kv .sep { grid-column: 1 / -1; border-top: 1px solid var(--grid); }
+.roi-hero { background: var(--good-bg); border-radius: 12px; padding: 16px; }
+.roi-hero .big { color: var(--good-ink); font-size: 26px; }
+.chain { display: flex; align-items: stretch; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+.chain .step { flex: 1 1 110px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+.chain .step b { display: block; font-size: 17px; }
+.chain .step span { font-size: 11px; color: var(--muted); }
+.chain .op { align-self: center; color: var(--muted); font-weight: 700; }
+.chain .step.out { background: var(--good-bg); border-color: transparent; }
+.chain .step.out b { color: var(--good-ink); }
+.note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+
+/* assumptions */
+.src { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+.src.a { background: var(--warn-bg); color: var(--warn-ink); }
+.src.b { background: var(--wash); color: var(--ink-2); }
+
+/* drawer */
+.scrim { position: fixed; inset: 0; background: rgba(0,0,0,.35); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 40; }
+.drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(560px, 100%); background: var(--surface); z-index: 41;
+          transform: translateX(100%); transition: transform .22s ease; display: flex; flex-direction: column; border-left: 1px solid var(--border); }
+.open .scrim { opacity: 1; pointer-events: auto; }
+.open .drawer { transform: none; }
+.dr-head { padding: 18px 20px; border-bottom: 1px solid var(--grid); display: flex; gap: 12px; align-items: flex-start; }
+.dr-head h3 { margin: 0; font-size: 18px; }
+.dr-head .meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.dr-body { padding: 18px 20px 40px; overflow-y: auto; display: grid; gap: 22px; align-content: start; }
+.dr-body h4 { margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.crit-list { display: grid; gap: 6px; }
+.crit-list div { display: grid; grid-template-columns: 22px 130px 1fr; gap: 8px; align-items: center; font-size: 13px; }
+.crit-list .ev { color: var(--ink-2); }
+.notebox { white-space: pre-wrap; font-size: 12.5px; line-height: 1.55; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 0; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--grid); display: grid; gap: 10px; }
+.timeline li { position: relative; font-size: 13px; }
+.timeline li::before { content: ""; position: absolute; left: -20px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 2px solid var(--axis); }
+.timeline li.claimed::before { border-color: var(--good); background: var(--good); }
+.timeline li.error::before { border-color: var(--crit); }
+.timeline .t { color: var(--muted); font-size: 12px; }
+.bubbles { display: grid; gap: 8px; }
+.bubble { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 13px; }
+.bubble.agent { background: var(--brand-soft); justify-self: start; border-bottom-left-radius: 4px; }
+.bubble.caller { background: var(--wash); justify-self: end; border-bottom-right-radius: 4px; }
+.bubble .who { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 2px; }
+
+#tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--page); padding: 6px 10px; border-radius: 8px;
+       font-size: 12px; opacity: 0; transition: opacity .08s; z-index: 60; max-width: 280px; }
+footer { padding: 30px 0 50px; color: var(--muted); font-size: 12px; text-align: center; }
+@media (max-width: 640px) {
+  .top { position: static; }
+  .wrap { padding: 0 16px; }
+  .hero-main .headline { font-size: 24px; }
+  .hero-stats b { font-size: 18px; }
+  .f-row { grid-template-columns: 84px 1fr 28px 40px; }
+  .hide-sm { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="banner" id="demo-banner" hidden>Demo deployment: the T01–T20 calls from the September file, with simulated claims. Changes you make reset when the server restarts.</div>
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">आ</div>
+      <div>
+        <h1>Aangan Studio · Enquiries</h1>
+        <div class="sub"><span class="live" id="updated">Loading…</span></div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="seg" id="period" role="group" aria-label="Period">
+        <button data-v="all" aria-pressed="true">All time</button>
+        <button data-v="mtd" aria-pressed="false">Month</button>
+        <button data-v="30d" aria-pressed="false">30 days</button>
+        <button data-v="7d" aria-pressed="false">7 days</button>
+      </div>
+      <label class="switch"><input type="checkbox" id="demo" checked> Demo data</label>
+      <a class="btn" href="/api/export.csv">⬇ CSV</a>
+      <button class="btn icon" id="theme" aria-label="Toggle light/dark">◐</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <nav class="tabs" id="tabs">
+      <a href="#overview" class="on">Overview</a>
+      <a href="#enquiries">Enquiries</a>
+      <a href="#costs">Costs &amp; ROI</a>
+      <a href="#assumptions">Assumptions</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- ═════════════ OVERVIEW ═════════════ -->
+  <section id="overview">
+    <div class="hero">
+      <div class="card hero-main">
+        <div>
+          <div class="eyebrow">What the agent generated</div>
+          <p class="headline" id="headline">&nbsp;</p>
+        </div>
+        <div class="hero-stats" id="hero-stats"></div>
+      </div>
+      <div class="card compare">
+        <div><h3>Before vs now</h3><p class="hint" style="margin:0">Before = Nikhil's manual count, from the brief.</p></div>
+        <div class="cmp-row">
+          <div class="cmp before"><div class="lab">Before</div><ul>
+            <li><b>~48%</b>no response within 48 h</li>
+            <li><b>~33%</b>arrive after hours, unanswered</li>
+            <li><b>No context</b>forwarded message to designer</li>
+          </ul></div>
+          <div class="cmp after"><div class="lab">Now</div><ul id="after-list"></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g-4 mt" id="kpis"></div>
+
+    <div class="grid g-3 mt">
+      <div class="card"><h3>From call to claimed lead</h3><p class="hint">Each step as a share of the one before.</p><div class="funnel" id="funnel"></div></div>
+      <div class="card"><h3>Outcome of every call</h3><p class="hint" id="outcome-hint">&nbsp;</p><div id="outcomes"></div></div>
+      <div class="card"><h3>Why enquiries were declined</h3><p class="hint">Closed politely, with a reason the caller understood.</p><div id="declines"></div></div>
+    </div>
+
+    <div class="card mt hours">
+      <h3>When calls arrive</h3><p class="hint">Calls by hour of day. The shaded band is front-desk hours (10am–7pm).</p>
+      <div id="hours"></div>
+      <div class="legend"><span><i class="sw" style="background:var(--s1)"></i>Office hours</span>
+        <span><i class="sw" style="background:var(--s2)"></i>After hours: would have gone unanswered before</span></div>
+    </div>
+  </section>
+
+  <!-- ═════════════ ENQUIRIES ═════════════ -->
+  <section id="enquiries">
+    <div class="sec-head"><div><h2>Enquiries</h2><p>Click any enquiry for its designer note, the evidence behind each criterion, its history and the transcript.</p></div></div>
+    <div class="card">
+      <h3>Needs attention</h3><p class="hint">Unclaimed leads, unacknowledged complaints, follow-ups, review items.</p>
+      <div id="attention" class="att"></div>
+    </div>
+    <div class="card mt">
+      <div class="tbl-tools">
+        <input class="search" id="search" type="search" placeholder="Search name, area, reason…" aria-label="Search enquiries">
+        <div class="chips" id="filters">
+          <button data-v="" aria-pressed="true">All</button>
+          <button data-v="Book" aria-pressed="false">Book</button>
+          <button data-v="Ask" aria-pressed="false">Ask</button>
+          <button data-v="Decline" aria-pressed="false">Decline</button>
+          <button data-v="Escalate" aria-pressed="false">Escalate</button>
+        </div>
+        <span class="muted" id="count" style="margin-left:auto;font-size:12px"></span>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>When</th><th>Caller</th><th title="1 real project · 2 service area · 3 timeline · 4 budget · 5 decision-maker">Criteria 1–5</th><th>Decision</th><th class="hide-sm">Reason</th><th>Claimed</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ═════════════ COSTS ═════════════ -->
+  <section id="costs">
+    <div class="sec-head"><div><h2>Costs &amp; ROI</h2><p>What it costs to run, per unit and per month, and what that buys.</p></div></div>
+    <div class="grid g-4" id="cost-kpis"></div>
+    <div class="card mt">
+      <h3>Where the money goes</h3><p class="hint" id="breakdown-hint">&nbsp;</p>
+      <div id="breakdown"></div>
+    </div>
+    <div class="cost-hero mt">
+      <div class="card">
+        <h3>Monthly projection</h3><p class="hint">Drag to change monthly call volume. Default from the brief: ~200/month.</p>
+        <div class="big" id="proj-total">&nbsp;</div>
+        <input class="slider" type="range" id="volume" min="50" max="600" step="10" aria-label="Calls per month">
+        <div class="muted" style="font-size:12px" id="volume-label"></div>
+        <dl class="kv" id="proj-kv"></dl>
+      </div>
+      <div class="card">
+        <h3>Return on investment</h3><p class="hint">Start with break-even: it needs the fewest assumptions.</p>
+        <div class="roi-hero"><div class="big" id="breakeven">&nbsp;</div><div class="note" id="breakeven-calc" style="margin-top:6px"></div></div>
+        <div id="chain"></div>
+        <p class="note" id="roi-note"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ ASSUMPTIONS ═════════════ -->
+  <section id="assumptions">
+    <div class="sec-head"><div><h2>Assumptions</h2><p>Replace the amber ones with real Vaani pricing and studio numbers in <code>config/assumptions.yaml</code>, then refresh.</p></div></div>
+    <div class="card"><div class="tbl-wrap"><table><thead><tr><th>Item</th><th>Value</th><th>Source</th></tr></thead><tbody id="assume"></tbody></table></div></div>
+  </section>
+</main>
+<footer>Aangan Studio · AI phone agent backend · numbers refresh every minute</footer>
+
+<!-- detail drawer -->
+<div id="drawer-root">
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-title">
+    <div class="dr-head">
+      <div style="flex:1"><h3 id="dr-title">&nbsp;</h3><div class="meta" id="dr-meta"></div></div>
+      <div id="dr-action"></div>
+      <button class="btn icon" id="dr-close" aria-label="Close">✕</button>
+    </div>
+    <div class="dr-body" id="dr-body"></div>
+  </aside>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+/* ═════════════ helpers ═════════════ */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const inr = (n, dp = 0) => n == null ? "n/a" : "₹" + Number(n).toLocaleString("en-IN", {maximumFractionDigits: dp, minimumFractionDigits: dp});
+const lakh = (n) => n == null ? "n/a" : n >= 1e7 ? "₹" + (n / 1e7).toFixed(2) + " Cr" : "₹" + (n / 1e5).toFixed(1).replace(/\.0$/, "") + " L";
+const pct = (n) => n == null ? "n/a" : (Math.round(n * 10) / 10) + "%";
+const mins = (n) => n == null ? "n/a" : n < 60 ? Math.round(n) + " min" : n < 1440 ? (n / 60).toFixed(1) + " h" : (n / 1440).toFixed(1) + " d";
+const when = (iso) => new Date(iso).toLocaleString("en-IN", {day: "numeric", month: "short", hour: "numeric", minute: "2-digit"});
+const DEC = {Book: "✓", Ask: "?", Decline: "✕", Escalate: "⚠"};
+const pill = (d) => `<span class="pill p-${esc(d)}">${DEC[d] || ""} ${esc(d)}</span>`;
+const CRIT_NAMES = ["Real project", "Service area", "Timeline", "Budget", "Decision-maker"];
+const CRIT_KEYS = ["c1_real_project", "c2_service_area", "c3_timeline", "c4_budget", "c5_decision_maker"];
+const CRIT_SYM = {pass: "✓", fail: "✕", unclear: "?", not_assessed: "–"};
+const dot = (r, i) => `<span class="dot d-${r ?? "null"}" data-tip="${CRIT_NAMES[i]}: ${esc((r || "n/a").replace("_", " "))}">${CRIT_SYM[r] || "·"}</span>`;
+const REASONS = {
+  advice_only: "Advice only", outside_service_area: "Outside Pune/PCMC",
+  out_of_scope_type: "Out-of-scope type", below_min_size: "Below min. size",
+  timeline_too_short: "Timeline too short", budget_misaligned: "Budget too low",
+  not_a_lead: "Not an enquiry", unknown: "Unknown",
+};
+const state = {period: "all", demo: true, volume: null, filter: "", search: "", data: null};
+
+/* ═════════════ render: overview ═════════════ */
+function kpi(icon, k, v, n, meter) {
+  return `<div class="card kpi"><div class="k"><span class="ico">${icon}</span>${esc(k)}</div><div class="v">${v}</div>
+    <div class="n">${n}</div>${meter != null ? `<div class="meter"><i style="width:${Math.max(0, Math.min(100, meter))}%"></i></div>` : ""}</div>`;
+}
+
+function renderOverview(m) {
+  const g = m.generates;
+  const pipe = `₹${Math.round(g.pipeline_inr_low / 1e5)}–${Math.round(g.pipeline_inr_high / 1e5)} L`;
+  $("headline").innerHTML = `${g.calls_answered} calls answered, ${pct(g.answered_within_5_min_pct)} within 5 minutes, day or night.`;
+  $("hero-stats").innerHTML = `
+    <div><b>${g.qualified_leads}</b><span>qualified leads</span></div>
+    <div><b>${mins(g.claim_median_min)}</b><span>median call → designer</span></div>
+    <div><b>${pipe}</b><span>pipeline (gross)</span></div>`;
+  $("after-list").innerHTML = `
+    <li><b>${pct(g.answered_within_5_min_pct)}</b>answered within 5 min</li>
+    <li><b>${g.after_hours_count} answered</b>after hours (${pct(g.after_hours_pct)} of calls)</li>
+    <li><b>Full note</b>designer never re-asks</li>`;
+
+  $("kpis").innerHTML = [
+    kpi("☎", "Calls answered", g.calls_answered, `${g.new_enquiries} new enquiries`),
+    kpi("⚡", "Answered within 5 min", pct(g.answered_within_5_min_pct), "before: ~52% within 48 h", g.answered_within_5_min_pct),
+    kpi("🌙", "After-hours calls", pct(g.after_hours_pct), `${g.after_hours_count} outside 10am–7pm`, g.after_hours_pct),
+    kpi("✓", "Qualified", pct(g.qualified_pct), `${g.qualified_leads} of ${g.new_enquiries} enquiries`, g.qualified_pct),
+    kpi("📅", "Consultations booked", g.consultations_booked, "slot agreed on the call"),
+    kpi("⚠", "Escalations", g.escalations, g.escalation_ack_median_min != null ? `acknowledged in ${mins(g.escalation_ack_median_min)} (median)` : "none acknowledged yet"),
+    kpi("✋", "Call → designer claim", mins(g.claim_median_min), g.claim_within_1h_pct != null ? `median · ${pct(g.claim_within_1h_pct)} within 1 h` : "no claims yet", g.claim_within_1h_pct),
+    kpi("₹", "Pipeline value", pipe, `${g.qualified_leads} leads × ₹8–14 L, before conversion`),
+  ].join("");
+
+  // funnel
+  const steps = [
+    ["Calls", g.calls_answered], ["New enquiries", g.new_enquiries], ["Qualified", g.qualified_leads],
+    ["Booked", g.consultations_booked], ["Claimed", g.claimed_leads],
+  ];
+  const top = Math.max(1, steps[0][1]);
+  const shades = ["--seq1", "--seq2", "--seq3", "--seq4", "--seq5"];
+  $("funnel").innerHTML = steps.map(([lab, n], i) => {
+    const prev = i ? steps[i - 1][1] : null;
+    const share = prev ? Math.round(100 * n / Math.max(prev, 1)) + "%" : "";
+    return `<div class="f-row" data-tip="${lab}: ${n}${share ? " · " + share + " of the step before" : ""}">
+      <div class="lab">${lab}</div>
+      <div><div class="bar" style="width:${Math.max(2, 100 * n / top)}%;background:var(${shades[i]})"></div></div>
+      <div class="n">${n}</div><div class="pc">${share}</div></div>`;
+  }).join("");
+
+  // outcomes
+  const D = g.decisions, total = Object.values(D).reduce((a, b) => a + b, 0) || 1;
+  const OUT = [["Book", "var(--good)", "qualified, consultation offered"], ["Ask", "var(--warn)", "one answer missing, front desk follows up"],
+               ["Decline", "var(--axis)", "not a fit, closed politely"], ["Escalate", "var(--crit)", "existing client, senior callback"]];
+  $("outcome-hint").textContent = `${g.needs_review} flagged for review · ${g.pricing_violations} pricing-guardrail hits`;
+  $("outcomes").innerHTML = `<div class="stackbar">${OUT.filter(([k]) => D[k]).map(([k, c]) =>
+      `<div style="flex:${D[k]};background:${c}" data-tip="${k}: ${D[k]} (${Math.round(100 * D[k] / total)}%)"></div>`).join("")}</div>
+    <div class="legend-list">${OUT.map(([k, c, desc]) => `<div class="it" data-tip="${desc}">
+      <i class="sw" style="background:${c};margin:0"></i><span>${pill(k)}</span><b class="num">${D[k]}</b><span class="c">${Math.round(100 * D[k] / total)}%</span></div>`).join("")}</div>`;
+
+  // declines
+  const dr = Object.entries(g.decline_reasons);
+  const dmax = Math.max(1, ...dr.map(([, v]) => v));
+  $("declines").innerHTML = dr.length ? dr.map(([k, v]) => `<div class="hbar" data-tip="${esc(REASONS[k] || k)}: ${v}">
+      <div class="lab">${esc(REASONS[k] || k)}</div><div class="track"><div class="fill" style="width:${100 * v / dmax}%"></div></div><div class="val num">${v}</div></div>`).join("")
+    : `<div class="muted">No declines in this period.</div>`;
+
+  $("hours").innerHTML = hourChart(g.calls_by_hour);
+}
+
+function hourChart(byHour) {
+  const W = 960, H = 200, L = 28, B = 170, T = 14, cw = (W - L) / 24;
+  const max = Math.max(1, ...byHour.map((h) => h.office + h.after));
+  const step = max <= 4 ? 1 : Math.ceil(max / 4);
+  let s = `<rect x="${L + 10 * cw}" y="${T - 6}" width="${9 * cw}" height="${B - T + 6}" fill="var(--wash)" rx="6"/>`;
+  s += `<text x="${L + 14.5 * cw}" y="${T + 6}" text-anchor="middle" font-size="11" fill="var(--muted)">front desk 10am–7pm</text>`;
+  for (let v = 0; v <= max; v += step) {
+    const y = B - (v / max) * (B - T - 16);
+    s += `<line x1="${L}" x2="${W}" y1="${y}" y2="${y}" stroke="var(--grid)"/><text x="${L - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="var(--muted)">${v}</text>`;
+  }
+  byHour.forEach((h, i) => {
+    const n = h.office + h.after, x = L + i * cw, bw = cw - 8, bh = (n / max) * (B - T - 16);
+    const label = `${h.hour}:00–${h.hour}:59 · ${n} call${n === 1 ? "" : "s"}${h.after ? " · after hours" : ""}`;
+    s += `<g data-tip="${label}"><rect x="${x}" y="${T}" width="${cw}" height="${B - T}" fill="transparent"/>`;
+    if (n) s += `<path d="M${x + 4},${B} v${-(bh - 4)} q0,-4 4,-4 h${bw - 8} q4,0 4,4 v${bh - 4} z" fill="${h.after ? "var(--s2)" : "var(--s1)"}"/>`;
+    s += `</g>`;
+    if (i % 3 === 0) s += `<text x="${x + cw / 2}" y="${B + 18}" text-anchor="middle" font-size="11" fill="var(--muted)">${["12am","3am","6am","9am","12pm","3pm","6pm","9pm"][i / 3]}</text>`;
+  });
+  s += `<line x1="${L}" x2="${W}" y1="${B}" y2="${B}" stroke="var(--axis)"/>`;
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Calls by hour of day">${s}</svg>`;
+}
+
+/* ═════════════ render: enquiries ═════════════ */
+function renderAttention(m) {
+  $("attention").innerHTML = m.attention.length ? m.attention.map((a) => `
+    <div class="att-card ${a.decision === "Escalate" ? "crit" : ""}" data-open="${a.id}" tabindex="0">
+      <div class="who"><span>${esc(a.name || "Unknown caller")}</span>${pill(a.decision)}</div>
+      <div class="why">${esc(a.reason || "")}</div>
+      <div>${a.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}<span class="muted" style="font-size:12px">#${a.id} · ${when(a.when)}</span></div>
+    </div>`).join("") : `<div class="empty" style="grid-column:1/-1">✓ Nothing waiting. Every lead is claimed.</div>`;
+}
+
+function renderRows() {
+  const m = state.data; if (!m) return;
+  const q = state.search.toLowerCase();
+  const rows = m.recent.filter((e) => (!state.filter || e.decision === state.filter) &&
+    (!q || [e.name, e.location, e.reason, e.decision, e.claimed_by].join(" ").toLowerCase().includes(q)));
+  $("count").textContent = `${rows.length} of ${m.recent.length}`;
+  $("rows").innerHTML = rows.length ? rows.map((e) => `
+    <tr data-open="${e.id}" tabindex="0">
+      <td class="num" style="white-space:nowrap">${when(e.when)}${e.after_hours ? ' <span data-tip="After hours">🌙</span>' : ""}</td>
+      <td class="who-cell"><b>${esc(e.name || "Unknown caller")}</b><span>${esc([e.location, e.is_demo ? "demo" : ""].filter(Boolean).join(" · "))}</span></td>
+      <td><span class="dots">${e.criteria.map(dot).join("")}</span></td>
+      <td>${pill(e.decision)}</td>
+      <td class="reason hide-sm">${esc(e.reason)}</td>
+      <td style="white-space:nowrap">${e.claimed_by ? `${esc(e.claimed_by)} <span class="muted">· ${mins(e.claim_min)}</span>`
+        : ["Book", "Escalate"].includes(e.decision) ? `<button class="btn" data-claim="${e.id}" data-kind="${e.decision}">${e.decision === "Escalate" ? "Acknowledge" : "Claim"}</button>` : `<span class="muted">n/a</span>`}</td>
+    </tr>`).join("") : `<tr><td colspan="6" class="muted" style="text-align:center;padding:30px">No enquiries match.</td></tr>`;
+}
+
+/* ═════════════ render: costs ═════════════ */
+function renderCosts(m) {
+  const c = m.costs, per = c.period, p = c.projection, r = c.roi, a = m.assumptions;
+  $("cost-kpis").innerHTML = [
+    kpi("Σ", "Total cost (period)", inr(per.total_inr), `over ${per.days} days, incl. fixed`),
+    kpi("☎", "Per enquiry", inr(per.per_enquiry_inr, 2), `projected at volume: ${inr(p.per_enquiry_inr, 2)}`),
+    kpi("✓", "Per qualified lead", inr(per.per_qualified_inr, 2), `projected: ${inr(p.per_qualified_inr, 2)}`),
+    kpi("📅", "Per booked consultation", inr(per.per_booked_inr, 2), "vs ₹8–14 L average project"),
+  ].join("");
+
+  const colors = ["--s1", "--s2", "--s3", "--s4", "--s5"];
+  const total = per.breakdown.reduce((x, b) => x + b.inr, 0) || 1;
+  $("breakdown-hint").textContent = `Selected period · variable costs stored on each call, fixed costs spread across ${per.days} days.`;
+  $("breakdown").innerHTML = `
+    <div class="stackbar" style="height:18px">${per.breakdown.map((b, i) => b.inr > 0 ?
+      `<div style="flex:${b.inr};background:var(${colors[i]})" data-tip="${esc(b.label)}: ${inr(b.inr, 2)} (${Math.round(100 * b.inr / total)}%)"></div>` : "").join("")}</div>
+    <div class="legend" style="gap:8px 22px;font-size:13px">${per.breakdown.map((b, i) => `
+      <span><i class="sw" style="background:var(${colors[i]})"></i>${esc(b.label)} <b class="num" style="color:var(--ink)">${inr(b.inr)}</b>
+      <span class="muted">${Math.round(100 * b.inr / total)}%</span></span>`).join("")}</div>`;
+
+  $("proj-total").innerHTML = `${inr(p.total_inr)} <small>/ month</small>`;
+  if (document.activeElement !== $("volume")) $("volume").value = p.monthly_calls;
+  $("volume-label").textContent = `${p.monthly_calls} calls / month`;
+  const pp = p.per_call_parts;
+  $("proj-kv").innerHTML = `
+    <dt>Average call <span class="muted">(${esc(p.avg_call_source)})</span></dt><dd>${Math.floor(p.avg_call_sec / 60)}m ${p.avg_call_sec % 60}s</dd>
+    <dt>Cost per call: voice ${inr(pp.cost_voice_inr, 2)} + phone ${inr(pp.cost_telephony_inr, 2)} + LLM ${inr(pp.cost_llm_inr, 2)}</dt><dd>${inr(p.per_call_inr, 2)}</dd>
+    <div class="sep"></div>
+    <dt>Variable · ${p.monthly_calls} calls</dt><dd>${inr(p.variable_inr)}</dd>
+    <dt>Fixed · hosting, phone number</dt><dd>${inr(p.fixed_inr)}</dd>
+    <div class="sep"></div>
+    <dt>Per enquiry</dt><dd>${inr(p.per_enquiry_inr, 2)}</dd>
+    <dt>Per qualified lead · ${Math.round(p.qualified_share * 100)}% qualify</dt><dd>${inr(p.per_qualified_inr, 2)}</dd>`;
+
+  $("breakeven").textContent = `Pays for itself with 1 extra project every ${r.breakeven_one_project_every_months} months`;
+  $("breakeven-calc").textContent = `${inr(r.monthly_cost_inr)}/month ÷ (${lakh(r.mid_project_value_inr)} average project × ${Math.round(a.value.gross_margin * 100)}% margin)`;
+  const v = a.value;
+  $("chain").innerHTML = `<div class="chain">
+    <div class="step"><b>${r.lost_enquiries_per_month}</b><span>slow enquiries / month (48%)</span></div><div class="op">×</div>
+    <div class="step"><b>${Math.round(p.qualified_share * 100)}%</b><span>qualify</span></div><div class="op">×</div>
+    <div class="step"><b>${(v.slow_answer_conversion_rate * (v.fast_answer_conversion_multiplier - 1) * 100).toFixed(0)}%</b><span>extra conversion (${v.fast_answer_conversion_multiplier}× − 1) × ${v.slow_answer_conversion_rate * 100}%</span></div></div>
+    <div class="chain" style="margin-top:6px"><div class="op">=</div><div class="step out"><b>${r.recovered_projects_per_month}</b><span>extra projects / month</span></div>
+    <div class="step out"><b>${lakh(r.recovered_revenue_inr)}</b><span>revenue / month · ${r.revenue_to_cost_multiple}× cost</span></div></div>`;
+  $("roi-note").textContent = "The 48% and 4× come from the brief. The base conversion rate and margin are ASSUMPTIONS, so treat the revenue figure as an illustration and break-even as the claim.";
+
+  const rows = [
+    ["Voice agent", inr(a.variable.voice_agent_inr_per_min, 2) + " / min", "a", "Replace with the Vaani quote"],
+    ["Telephony", inr(a.variable.telephony_inr_per_min, 2) + " / min" + (a.variable.telephony_round_up_to_minute ? ", per started minute" : ""), "a", ""],
+    ["LLM during call", inr(a.variable.llm_inr_per_min, 2) + " / min", "a", "0 if Vaani bundles it"],
+    ["LLM post-call extraction", inr(a.variable.llm_post_call_inr, 2) + " / call", "a", ""],
+    ["Messaging", inr(a.variable.message_inr_per_alert, 2) + " / alert", "b", "Telegram and email are free"],
+    ...Object.entries(a.fixed_monthly).map(([k, val]) => [k.replace(/_inr$/, "").replace(/_/g, " ").replace(/^./, (ch) => ch.toUpperCase()),
+      inr(val) + " / month", k === "email_inr" ? "b" : "a",
+      k === "email_inr" ? "Gmail/Workspace already paid for" : k === "voice_platform_subscription_inr" ? "Vaani plan fee, if any: confirm" : ""]),
+    ["Calls per month", a.monthly_calls_default, "b", "Brief: ~200 enquiries"],
+    ["Average project value", `${lakh(a.value.avg_project_value_inr_low)}–${lakh(a.value.avg_project_value_inr_high)}`, "b", "Brief"],
+    ["No response within 48 h", pct(a.value.no_response_48h_share * 100), "b", "Brief"],
+    ["Fast-answer conversion lift", a.value.fast_answer_conversion_multiplier + "×", "b", "Brief"],
+    ["Base conversion (slow answer)", pct(a.value.slow_answer_conversion_rate * 100), "a", ""],
+    ["Gross margin", pct(a.value.gross_margin * 100), "a", ""],
+  ];
+  $("assume").innerHTML = rows.map(([k, val, src, note]) => `<tr style="cursor:default"><td>${esc(k)}</td><td class="num"><b>${esc(val)}</b></td>
+    <td><span class="src ${src}">${src === "a" ? "ASSUMPTION" : "Known"}</span> <span class="muted" style="font-size:12px">${esc(note)}</span></td></tr>`).join("");
+}
+
+/* ═════════════ drawer ═════════════ */
+async function openDrawer(id) {
+  document.body.classList.add("open");
+  $("dr-title").textContent = "Loading…"; $("dr-meta").textContent = ""; $("dr-body").innerHTML = ""; $("dr-action").innerHTML = "";
+  const res = await fetch(`/api/enquiries/${id}`);
+  if (!res.ok) { $("dr-title").textContent = "Could not load"; return; }
+  const d = await res.json(), e = d.enquiry;
+  $("dr-title").innerHTML = `${esc(e.caller_name || "Unknown caller")} ${pill(e.decision)}`;
+  $("dr-meta").textContent = `#${e.id} · ${when(e.received_at)}${e.after_hours ? " · after hours" : ""} · ${e.duration_sec ? Math.floor(e.duration_sec / 60) + "m " + (e.duration_sec % 60) + "s" : ""} · ${e.channel}${e.is_demo ? " · demo" : ""}`;
+  $("dr-action").innerHTML = !e.claimed_by && ["Book", "Escalate"].includes(e.decision)
+    ? `<button class="btn primary" data-claim="${e.id}" data-kind="${e.decision}">${e.decision === "Escalate" ? "Acknowledge" : "Claim lead"}</button>` : "";
+  const crit = CRIT_KEYS.map((k, i) => {
+    const c = d.criteria[k] || {};
+    return `<div>${dot(c.result, i)}<b>${CRIT_NAMES[i]}</b><span class="ev">${esc(c.evidence || "")}</span></div>`;
+  }).join("");
+  $("dr-body").innerHTML = `
+    <div><h4>Why</h4><div style="font-size:15px;font-weight:500">${esc(e.reason || "")}</div>${e.review_reasons?.length ? `<div class="tag" style="background:var(--warn-bg);color:var(--warn-ink);margin-top:6px">Review: ${esc(e.review_reasons.join("; "))}</div>` : ""}
+      ${e.flags?.length ? `<div style="margin-top:8px">${e.flags.map((f) => `<span class="tag">${esc(f.replace(/_/g, " "))}</span>`).join("")}</div>` : ""}</div>
+    ${e.call_type === "existing_client_complaint" ? "" : `<div><h4>Five criteria</h4><div class="crit-list">${crit}</div></div>`}
+    ${d.note ? `<div><h4>Designer note (as sent to Telegram)</h4><pre class="notebox">${esc(d.note)}</pre></div>` : ""}
+    <div><h4>History</h4><ul class="timeline">${d.events.map((ev) => `<li class="${esc(ev.kind)}"><b>${esc(ev.kind.replace(/_/g, " "))}</b> <span class="muted">${esc(ev.detail || "")}</span><div class="t">${when(ev.at)}</div></li>`).join("") || "<li>No events</li>"}</ul></div>
+    <div><h4>Transcript · <a href="${esc(d.transcript_url)}" target="_blank" rel="noopener">open full</a></h4><div class="bubbles">${(e.transcript || []).map((t) =>
+      `<div class="bubble ${t.speaker === "agent" ? "agent" : "caller"}"><div class="who">${t.speaker === "agent" ? "Agent" : "Caller"}</div>${esc(t.text)}</div>`).join("")}</div></div>`;
+}
+function closeDrawer() { document.body.classList.remove("open"); }
+
+/* ═════════════ data ═════════════ */
+async function load() {
+  const params = new URLSearchParams({period: state.period, demo: state.demo});
+  if (state.volume) params.set("volume", state.volume);
+  const res = await fetch("/api/metrics?" + params);
+  if (!res.ok) { $("updated").textContent = "Could not load metrics (" + res.status + ")"; return; }
+  const m = await res.json();
+  state.data = m;
+  $("updated").textContent = `Live · updated ${new Date(m.generated_at).toLocaleTimeString("en-IN", {hour: "numeric", minute: "2-digit"})}${m.range.include_demo ? " · incl. demo data" : ""}`;
+  renderOverview(m); renderAttention(m); renderRows(); renderCosts(m);
+}
+
+/* ═════════════ events ═════════════ */
+document.addEventListener("click", async (ev) => {
+  const claim = ev.target.closest("[data-claim]");
+  if (claim) {
+    ev.stopPropagation();
+    const id = claim.dataset.claim;
+    const by = prompt(`${claim.dataset.kind === "Escalate" ? "Acknowledge" : "Claim"} enquiry #${id}: your name?`);
+    if (!by) return;
+    const r = await (await fetch(`/api/enquiries/${id}/claim`, {method: "POST", headers: {"content-type": "application/json"}, body: JSON.stringify({by})})).json();
+    alert(r.message);
+    await load();
+    if (document.body.classList.contains("open")) openDrawer(id);
+    return;
+  }
+  const open = ev.target.closest("[data-open]");
+  if (open && !ev.target.closest("a")) openDrawer(open.dataset.open);
+});
+document.addEventListener("keydown", (ev) => {
+  if (ev.key === "Escape") closeDrawer();
+  if (ev.key === "Enter" && ev.target.dataset?.open) openDrawer(ev.target.dataset.open);
+});
+$("scrim").onclick = closeDrawer; $("dr-close").onclick = closeDrawer;
+
+$("period").addEventListener("click", (ev) => {
+  const b = ev.target.closest("button"); if (!b) return;
+  [...$("period").children].forEach((x) => x.setAttribute("aria-pressed", x === b));
+  state.period = b.dataset.v; load();
+});
+$("filters").addEventListener("click", (ev) => {
+  const b = ev.target.closest("button"); if (!b) return;
+  [...$("filters").children].forEach((x) => x.setAttribute("aria-pressed", x === b));
+  state.filter = b.dataset.v; renderRows();
+});
+$("demo").onchange = (ev) => { state.demo = ev.target.checked; load(); };
+$("search").oninput = (ev) => { state.search = ev.target.value; renderRows(); };
+let volTimer;
+$("volume").oninput = (ev) => {
+  state.volume = +ev.target.value; $("volume-label").textContent = `${state.volume} calls / month`;
+  clearTimeout(volTimer); volTimer = setTimeout(load, 150);
+};
+
+// theme toggle (remembered per browser)
+const root = document.documentElement;
+try { const t = localStorage.getItem("aangan-theme"); if (t) root.dataset.theme = t; } catch (_) {}
+$("theme").onclick = () => {
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("aangan-theme", root.dataset.theme); } catch (_) {}
+};
+
+// highlight the tab for the section in view
+const tabs = [...document.querySelectorAll("#tabs a")];
+const spy = new IntersectionObserver((entries) => entries.forEach((en) => {
+  if (en.isIntersecting) tabs.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + en.target.id));
+}), {rootMargin: "-40% 0px -55% 0px"});
+document.querySelectorAll("main section").forEach((sec) => spy.observe(sec));
+
+// shared tooltip
+const tip = $("tip");
+document.addEventListener("mousemove", (ev) => {
+  const el = ev.target.closest("[data-tip]");
+  if (!el) { tip.style.opacity = 0; return; }
+  tip.textContent = el.dataset.tip;
+  tip.style.left = Math.min(ev.clientX + 12, innerWidth - tip.offsetWidth - 8) + "px";
+  tip.style.top = (ev.clientY + 16) + "px";
+  tip.style.opacity = 1;
+});
+
+// banner on hosted demo deployments
+fetch("/health").then((r) => r.json()).then((h) => { if (h.vercel && h.demo_seed) $("demo-banner").hidden = false; }).catch(() => {});
+
+load();
+setInterval(() => { if (!document.body.classList.contains("open")) load(); }, 60000);
+</script>
+</body>
+</html>

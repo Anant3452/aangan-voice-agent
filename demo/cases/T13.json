@@ -1,0 +1,103 @@
+{
+  "id": "T13",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T13",
+  "note": "Booked by the front desk without a timeline. Criterion 3 unclear, so the agent asks once; no answer in the source.",
+  "expected": {
+    "decision": "Ask",
+    "criteria": [
+      "pass",
+      "pass",
+      "unclear",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-16T12:19:00+05:30",
+    "duration_sec": 368,
+    "caller_number": "+91 90000 00013",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "3BHK in Aundh, about 1,100 sq ft. What might it cost?"
+    },
+    {
+      "role": "agent",
+      "text": "Pricing depends on the site, the materials you choose, and the scope — your designer will walk you through it in detail at the consultation. I can book that for you right now if you'd like."
+    },
+    {
+      "role": "caller",
+      "text": "Kitchen, wardrobes in both bedrooms, living room. Can't you give me even a rough range?"
+    },
+    {
+      "role": "agent",
+      "text": "I really can't give a number that would be accurate without the designer seeing the site. That's exactly what the consultation is for."
+    },
+    {
+      "role": "caller",
+      "text": "Fine. Let's book then."
+    },
+    {
+      "role": "agent",
+      "text": "When would you need the project complete?"
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "phone": "+91 90000 00013"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "3BHK",
+      "carpet_area_sqft": 1100,
+      "location_text": "Aundh",
+      "locality": "Aundh",
+      "zone": "pune_city",
+      "scope_rooms": [
+        "kitchen",
+        "wardrobes x2",
+        "living room"
+      ],
+      "execution_wanted": true
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Kitchen, wardrobes, living"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Aundh"
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": "Never discussed"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Not raised"
+      }
+    },
+    "decision": "Ask",
+    "reason_code": "criteria_unclear",
+    "reason": "Aundh 3BHK, keen to book, but completion timeline not established.",
+    "flags": [
+      "pricing_asked"
+    ],
+    "uncertainties": [
+      "Timeline: ask when they need it complete",
+      "Price-sensitive"
+    ]
+  }
+}

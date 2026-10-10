@@ -1,0 +1,68 @@
+{
+  "id": "T17a",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T17",
+  "note": "First attempt dropped after 1:12. The call-back two minutes later (T17) is linked to it automatically.",
+  "expected": {
+    "decision": "Ask",
+    "criteria": [
+      "unclear",
+      "unclear",
+      "unclear",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-22T14:14:00+05:30",
+    "duration_sec": 72,
+    "caller_number": "+91 90000 00017",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "agent",
+      "text": "Hello, Aangan Studio."
+    },
+    {
+      "role": "caller",
+      "text": "Hi, I wanted to inquire about..."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "phone": "+91 90000 00017"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "unclear",
+        "evidence": null
+      },
+      "c2_service_area": {
+        "result": "unclear",
+        "evidence": null
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": null
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": null
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": null
+      }
+    },
+    "decision": "Ask",
+    "reason_code": "call_dropped",
+    "reason": "Line dropped before any details.",
+    "flags": [
+      "dropped_call"
+    ]
+  }
+}

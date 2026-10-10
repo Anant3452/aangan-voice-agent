@@ -1,0 +1,112 @@
+{
+  "id": "T06",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T06",
+  "note": "",
+  "expected": {
+    "decision": "Book",
+    "criteria": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-05T15:28:00+05:30",
+    "duration_sec": 301,
+    "caller_number": "+91 90000 00006",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "Startup, first office in Baner, about 800 sq ft. Workstations for 20, a cabin, meeting room, break area."
+    },
+    {
+      "role": "agent",
+      "text": "What's the space like right now?"
+    },
+    {
+      "role": "caller",
+      "text": "Bare shell."
+    },
+    {
+      "role": "agent",
+      "text": "And when do you need to be operational?"
+    },
+    {
+      "role": "caller",
+      "text": "December."
+    },
+    {
+      "role": "caller",
+      "text": "I'm the founder."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "relationship_to_property": "founder_or_director",
+      "phone": "+91 90000 00006"
+    },
+    "project": {
+      "segment": "commercial",
+      "property_type": "office",
+      "carpet_area_sqft": 800,
+      "area_basis": "unknown",
+      "location_text": "Baner",
+      "locality": "Baner",
+      "zone": "pune_city",
+      "scope_rooms": [
+        "20 workstations",
+        "cabin",
+        "meeting room",
+        "break area"
+      ],
+      "scope_summary": "Full office fitout",
+      "execution_wanted": true,
+      "site_status": "bare_shell",
+      "ownership": "leased_commercial",
+      "timeline_text": "Operational by December",
+      "target_completion": "2026-12"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Full fitout"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Baner"
+      },
+      "c3_timeline": {
+        "result": "pass",
+        "evidence": "December (~13 weeks)"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Founder"
+      }
+    },
+    "decision": "Book",
+    "reason_code": "qualified",
+    "reason": "800 sq ft bare-shell office fitout in Baner by December.",
+    "consultation": {
+      "slot_text": "Mon 8 Sep, 11:00 am",
+      "mode": "site_visit"
+    },
+    "flags": [],
+    "uncertainties": [
+      "Company and caller name not captured"
+    ],
+    "designer_brief": "Startup founder. 800 sq ft bare shell in Baner: 20 workstations, cabin, meeting room, break area. Operational by December."
+  }
+}

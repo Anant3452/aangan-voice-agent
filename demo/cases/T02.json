@@ -1,0 +1,123 @@
+{
+  "id": "T02",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T02",
+  "note": "",
+  "expected": {
+    "decision": "Book",
+    "criteria": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-03T14:41:00+05:30",
+    "duration_sec": 308,
+    "caller_number": "+91 90000 00002",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I have a 2BHK in Wakad. Roughly how much would it cost?"
+    },
+    {
+      "role": "agent",
+      "text": "Pricing depends on the site, the materials you choose, and the scope — your designer will walk you through it in detail at the consultation. I can book that for you right now if you'd like."
+    },
+    {
+      "role": "caller",
+      "text": "Full redesign: modular kitchen, wardrobes, living, both bedrooms. About 950 sq ft. We move in November."
+    },
+    {
+      "role": "caller",
+      "text": "Can you give me a rough ballpark first? Even a range?"
+    },
+    {
+      "role": "agent",
+      "text": "I really can't give a number that would be accurate without the designer seeing the site. That's exactly what the consultation is for."
+    },
+    {
+      "role": "caller",
+      "text": "Okay, fair enough. Let's book it."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "relationship_to_property": "unknown",
+      "phone": "+91 90000 00002"
+    },
+    "source": {
+      "type": "instagram"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "2BHK",
+      "carpet_area_sqft": 950,
+      "area_basis": "unknown",
+      "location_text": "Wakad",
+      "locality": "Wakad",
+      "zone": "pcmc",
+      "scope_rooms": [
+        "kitchen",
+        "wardrobes",
+        "living room",
+        "bedroom 1",
+        "bedroom 2"
+      ],
+      "scope_summary": "Full redesign",
+      "execution_wanted": true,
+      "timeline_text": "Moving in November; design from October",
+      "target_completion": "2026-11"
+    },
+    "budget": {
+      "volunteered": false,
+      "caller_words": null
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Full redesign with modular kitchen"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Wakad (PCMC)"
+      },
+      "c3_timeline": {
+        "result": "pass",
+        "evidence": "Move-in November, ~12 weeks away"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Not raised; treated as qualified"
+      }
+    },
+    "decision": "Book",
+    "reason_code": "qualified",
+    "reason": "Full 2BHK redesign in Wakad; asked about price twice and was deflected.",
+    "consultation": {
+      "slot_text": "Mon 8 Sep, 4:00 pm",
+      "mode": "studio"
+    },
+    "flags": [
+      "pricing_asked"
+    ],
+    "uncertainties": [
+      "Caller's name not captured",
+      "Who decides not discussed",
+      "Carpet vs built-up not confirmed"
+    ],
+    "designer_brief": "Instagram lead. 950 sq ft 2BHK in Wakad, full redesign. Moving in November, so tight but workable. Price-sensitive: asked for a ballpark twice."
+  }
+}

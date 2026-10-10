@@ -1,0 +1,86 @@
+{
+  "id": "T07",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T07",
+  "note": "",
+  "expected": {
+    "decision": "Decline",
+    "criteria": [
+      "pass",
+      "unclear",
+      "fail",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-08T09:44:00+05:30",
+    "duration_sec": 195,
+    "caller_number": "+91 90000 00007",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I want to redo my living room and kitchen before Diwali."
+    },
+    {
+      "role": "agent",
+      "text": "I'd rather be straight with you: the design alone takes three to four weeks, and the execution comes after that. We couldn't do justice to it before Diwali."
+    },
+    {
+      "role": "agent",
+      "text": "If a later finish works, say starting after Diwali, we'd love to do it properly."
+    },
+    {
+      "role": "caller",
+      "text": "Let me think and call back."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "phone": "+91 90000 00007"
+    },
+    "project": {
+      "segment": "residential",
+      "scope_rooms": [
+        "living room",
+        "kitchen"
+      ],
+      "execution_wanted": true,
+      "timeline_text": "Before Diwali (~3 weeks)"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Living room + kitchen redo"
+      },
+      "c2_service_area": {
+        "result": "unclear",
+        "evidence": "Not discussed"
+      },
+      "c3_timeline": {
+        "result": "fail",
+        "evidence": "Needs it in ~3 weeks"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Not raised"
+      }
+    },
+    "decision": "Decline",
+    "reason_code": "timeline_too_short",
+    "reason": "Wants it done before Diwali (~3 weeks); offered a post-Diwali start, caller will think.",
+    "flags": [
+      "urgent_timeline",
+      "nurture_later"
+    ]
+  }
+}

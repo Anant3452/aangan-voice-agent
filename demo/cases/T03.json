@@ -1,0 +1,76 @@
+{
+  "id": "T03",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T03",
+  "note": "",
+  "expected": {
+    "decision": "Decline",
+    "criteria": [
+      "pass",
+      "fail",
+      "unclear",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-03T16:15:00+05:30",
+    "duration_sec": 160,
+    "caller_number": "+91 90000 00003",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I'm Suresh Patil, in Nashik. Could you take on my home office and study?"
+    },
+    {
+      "role": "agent",
+      "text": "We only work in Pune and PCMC right now. Our execution depends on our own contractors being on site, and we don't have that network in Nashik. I'm sorry we can't help with this one."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": "Suresh Patil",
+      "phone": "+91 90000 00003"
+    },
+    "source": {
+      "type": "linkedin"
+    },
+    "project": {
+      "segment": "residential",
+      "location_text": "Nashik",
+      "zone": "outside",
+      "scope_summary": "Home office and study",
+      "execution_wanted": true
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Redo home office and study"
+      },
+      "c2_service_area": {
+        "result": "fail",
+        "evidence": "Nashik"
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": "Not discussed"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Not raised"
+      }
+    },
+    "decision": "Decline",
+    "reason_code": "outside_service_area",
+    "reason": "Site is in Nashik, outside Pune/PCMC.",
+    "flags": []
+  }
+}

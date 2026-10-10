@@ -1,0 +1,8 @@
+.venv
+.git
+data/*.db
+data/outbox.log
+data/digests
+__pycache__
+.pytest_cache
+tests

@@ -1,0 +1,93 @@
+{
+  "id": "T14",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T14",
+  "note": "Decision-maker (criterion 5) is unclear, which is fine (don't push). Timeline was never discussed, so criterion 3 is unclear and the agent asks once.",
+  "expected": {
+    "decision": "Ask",
+    "criteria": [
+      "pass",
+      "pass",
+      "unclear",
+      "pass",
+      "unclear"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-17T11:41:00+05:30",
+    "duration_sec": 295,
+    "caller_number": "+91 90000 00014",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I'm enquiring for my parents. 3BHK in Hadapsar, new possession. They want a proper design."
+    },
+    {
+      "role": "agent",
+      "text": "Would your parents be able to join the consultation?"
+    },
+    {
+      "role": "caller",
+      "text": "Yes, they'd come. They'll decide."
+    },
+    {
+      "role": "agent",
+      "text": "When would they need the project complete?"
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "relationship_to_property": "family_of_owner",
+      "acting_for": "parents (owners)",
+      "phone": "+91 90000 00014"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "3BHK",
+      "location_text": "Hadapsar",
+      "locality": "Hadapsar",
+      "zone": "pune_city",
+      "scope_summary": "Full home design",
+      "execution_wanted": true,
+      "site_status": "vacant"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Proper design of new flat"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Hadapsar"
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": "Never discussed"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "unclear",
+        "evidence": "Son researching; parents decide and will attend"
+      }
+    },
+    "decision": "Ask",
+    "reason_code": "criteria_unclear",
+    "reason": "Son calling for parents' Hadapsar 3BHK; timeline not established.",
+    "flags": [
+      "acting_on_behalf"
+    ],
+    "uncertainties": [
+      "Decision sits with parents",
+      "Timeline: ask when they need it complete"
+    ]
+  }
+}

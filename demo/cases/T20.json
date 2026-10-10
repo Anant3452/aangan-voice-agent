@@ -1,0 +1,101 @@
+{
+  "id": "T20",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T20",
+  "note": "",
+  "expected": {
+    "decision": "Book",
+    "criteria": [
+      "pass",
+      "pass",
+      "pass",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-25T09:15:00+05:30",
+    "duration_sec": 284,
+    "caller_number": "+91 90000 00020",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "Good morning, I'm Pooja. 2BHK in Magarpatta, Cybercity area. Kitchen, both bedrooms, living. About 900 sq ft."
+    },
+    {
+      "role": "agent",
+      "text": "When would you need it?"
+    },
+    {
+      "role": "caller",
+      "text": "January start for execution would be ideal."
+    },
+    {
+      "role": "caller",
+      "text": "My husband and I both want to be at the consultation."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": "Pooja",
+      "relationship_to_property": "co_owner",
+      "phone": "+91 90000 00020"
+    },
+    "project": {
+      "segment": "residential",
+      "property_type": "apartment",
+      "bhk": "2BHK",
+      "carpet_area_sqft": 900,
+      "location_text": "Magarpatta (Cybercity)",
+      "locality": "Magarpatta",
+      "zone": "pune_city",
+      "scope_rooms": [
+        "kitchen",
+        "bedroom 1",
+        "bedroom 2",
+        "living room"
+      ],
+      "execution_wanted": true,
+      "site_status": "occupied",
+      "ownership": "owned",
+      "timeline_text": "January start for execution, flexible"
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "pass",
+        "evidence": "Kitchen, bedrooms, living"
+      },
+      "c2_service_area": {
+        "result": "pass",
+        "evidence": "Magarpatta"
+      },
+      "c3_timeline": {
+        "result": "pass",
+        "evidence": "January start, flexible"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Co-owners, both attending"
+      }
+    },
+    "decision": "Book",
+    "reason_code": "qualified",
+    "reason": "Magarpatta 2BHK, full scope, January execution start.",
+    "consultation": {
+      "slot_text": "Sat 27 Sep, 10:30 am",
+      "mode": "studio",
+      "attendees": "Pooja and husband"
+    },
+    "flags": [],
+    "uncertainties": [],
+    "designer_brief": "Pooja, 900 sq ft 2BHK in Magarpatta Cybercity. Kitchen, both bedrooms, living. Execution from January. Both owners attending. Called at 9:15am, before the front desk opens."
+  }
+}

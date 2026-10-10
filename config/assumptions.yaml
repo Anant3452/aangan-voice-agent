@@ -1,0 +1,86 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  Aangan phone agent — every tunable number lives here.
+#  Anything marked ASSUMPTION is a placeholder: replace it with the real value.
+# ─────────────────────────────────────────────────────────────────────────────
+
+business:
+  timezone: Asia/Kolkata
+  front_desk_open: "10:00"        # from the brief: front desk covers 10am–7pm
+  front_desk_close: "19:00"
+  front_desk_closed_days: []      # ASSUMPTION — e.g. [Sunday]; transcripts don't say
+
+rules:
+  repeat_caller_window_days: 14   # a call from the same number within this window is a "repeat"
+  dropped_call_merge_minutes: 30  # a call-back this soon after a dropped call is linked to it
+
+routing:
+  # Who gets pinged, and how often, when nobody claims. All ASSUMPTIONS — agree these with Nikhil.
+  alert_hours_start: "08:00"        # outside these hours alerts post SILENTLY and re-alerts pause
+  alert_hours_end: "21:00"
+  lead_realert_minutes: 20          # unclaimed qualified lead → re-post to designers every N minutes
+  lead_max_realerts: 3              # after this many, it goes to Nikhil's urgent chat
+  complaint_realert_minutes: 10     # unacknowledged complaint → re-post to urgent chat every N minutes
+  complaint_max_realerts: 6
+  complaints_ignore_alert_hours: false   # true = complaints ring Nikhil's phone even at 2am
+  digest_time: "08:30"              # daily email digest covering the previous day
+  scheduler_interval_seconds: 60
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  COSTS — ALL ASSUMPTIONS. Replace with Vaani's real quote and your telco bill.
+#  Rupees (INR). Variable costs are stored on every call; fixed costs are
+#  spread across the month on the dashboard.
+# ─────────────────────────────────────────────────────────────────────────────
+costs:
+  variable:
+    voice_agent_inr_per_min: 6.00        # ASSUMPTION: Vaani voice-agent minute (speech-to-text + text-to-speech + platform)
+    telephony_inr_per_min: 0.80          # ASSUMPTION: inbound call minute on the studio number
+    telephony_round_up_to_minute: true   # ASSUMPTION: Indian telcos usually bill per started minute
+    llm_inr_per_min: 1.00                # ASSUMPTION: LLM during the call. Set 0 if Vaani bundles it into the minute rate
+    llm_post_call_inr: 0.50              # ASSUMPTION: one post-call extraction (Part B JSON)
+    message_inr_per_alert: 0.00          # Telegram and email are free. (WhatsApp/SMS would be ~₹0.15–0.80 each)
+  fixed_monthly:
+    hosting_inr: 800                     # ASSUMPTION: small cloud VM / app host
+    phone_number_inr: 500                # ASSUMPTION: virtual number rental
+    voice_platform_subscription_inr: 0   # ASSUMPTION: Vaani plan fee, if any
+    email_inr: 0                         # Gmail/Workspace already paid for
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  VOLUME & VALUE — for the monthly projection and ROI on the dashboard
+# ─────────────────────────────────────────────────────────────────────────────
+volume:
+  monthly_calls: 200                # from the brief (~200 enquiries/month). Conservative for phone-only:
+                                    # in the Sep sample 20 of 40 enquiries were phone, so real call volume may be ~100.
+  # Average call length is DERIVED from the answered phone transcripts (T01–T20),
+  # until at least `min_logged_calls_to_use_actuals` real calls have been logged.
+  transcript_durations_sec:
+    T01: 252   # 4:12
+    T02: 308   # 5:08
+    T03: 160   # 2:40
+    T04: 202   # 3:22
+    T05: 404   # 6:44
+    T06: 301   # 5:01
+    T07: 195   # 3:15
+    # T08 missed call: no duration
+    T09: 352   # 5:52
+    T10: 220   # 3:40
+    T11: 382   # 6:22
+    T12: 450   # 7:30
+    T13: 368   # 6:08
+    T14: 295   # 4:55
+    T15: 344   # 5:44
+    T16: 318   # 5:18
+    # T17 first attempt dropped at 1:12, excluded as not a conversation
+    T17: 270   # 4:30 (the completed call-back)
+    T18: 182   # 3:02
+    T19: 170   # 2:50
+    T20: 284   # 4:44
+  min_logged_calls_to_use_actuals: 30
+
+value:
+  avg_project_value_inr_low: 800000      # from the brief: ₹8–14 lakh
+  avg_project_value_inr_high: 1400000
+  no_response_48h_share: 0.48            # from the brief: ~48% get no response within 48 hrs
+  fast_answer_conversion_multiplier: 4   # from the brief: answered <1 hr converts 4× next-day
+  slow_answer_conversion_rate: 0.03      # ASSUMPTION: share of slow-answered QUALIFIED enquiries that become projects
+  qualified_share_fallback: 0.50         # ASSUMPTION: used until enough real calls exist to measure it
+  gross_margin: 0.25                     # ASSUMPTION: studio margin on project revenue, for the break-even line

@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aangan/agent-output/1.0",
+  "title": "Aangan phone agent — end-of-call structured output",
+  "description": "Produced by the Vaani agent after every call (Part B of system_prompt.md). Channel-neutral: WhatsApp and web-form adapters will produce the same shape.",
+  "type": "object",
+  "required": ["schema_version", "call_type", "caller", "criteria", "decision", "reason_code", "reason", "flags"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "1.0" },
+
+    "call_type": {
+      "enum": ["new_enquiry", "existing_client_complaint", "existing_client_query", "not_an_enquiry"]
+    },
+
+    "language": { "enum": ["en", "hi", "hinglish", "mr", "mixed"] },
+
+    "caller": {
+      "type": "object",
+      "required": ["name", "phone"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": ["string", "null"] },
+        "phone": { "type": ["string", "null"], "description": "Best callback number, confirmed on the call" },
+        "email": { "type": ["string", "null"] },
+        "relationship_to_property": {
+          "enum": ["owner", "co_owner", "tenant", "family_of_owner", "employee_of_company", "founder_or_director", "representative", "unknown", null]
+        },
+        "acting_for": { "type": ["string", "null"], "description": "Who the caller represents, e.g. 'parents (owners)'" }
+      }
+    },
+
+    "source": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "enum": ["referral", "instagram", "google", "linkedin", "website", "press", "builder", "repeat_client", "other", "unknown", null] },
+        "referrer_name": { "type": ["string", "null"] },
+        "detail": { "type": ["string", "null"] }
+      }
+    },
+
+    "project": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "segment": { "enum": ["residential", "commercial", null] },
+        "property_type": { "enum": ["apartment", "villa", "independent_house", "office", "clinic", "studio", "coworking", "restaurant", "retail", "gym", "hotel", "other", null] },
+        "bhk": { "type": ["string", "null"] },
+        "carpet_area_sqft": { "type": ["number", "null"] },
+        "area_basis": { "enum": ["carpet", "built_up", "unknown", null] },
+        "location_text": { "type": ["string", "null"], "description": "Exactly as the caller described it" },
+        "locality": { "type": ["string", "null"] },
+        "zone": { "enum": ["pune_city", "pcmc", "outside", "unclear", null] },
+        "scope_rooms": { "type": "array", "items": { "type": "string" } },
+        "scope_summary": { "type": ["string", "null"] },
+        "execution_wanted": { "type": ["boolean", "null"] },
+        "site_status": { "enum": ["occupied", "vacant", "bare_shell", "under_construction", "possession_pending", "unknown", null] },
+        "ownership": { "enum": ["owned", "rented", "leased_commercial", "unknown", null] },
+        "structural_changes_requested": { "type": ["boolean", "null"] },
+        "timeline_text": { "type": ["string", "null"], "description": "Caller's words" },
+        "target_completion": { "type": ["string", "null"], "description": "ISO date or YYYY-MM if stated" },
+        "site_available_from": { "type": ["string", "null"] }
+      }
+    },
+
+    "budget": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "volunteered": { "type": "boolean" },
+        "caller_words": { "type": ["string", "null"], "description": "Only if the caller raised it. Never asked." }
+      }
+    },
+
+    "criteria": {
+      "type": "object",
+      "required": ["c1_real_project", "c2_service_area", "c3_timeline", "c4_budget", "c5_decision_maker"],
+      "additionalProperties": false,
+      "properties": {
+        "c1_real_project":   { "$ref": "#/$defs/criterion" },
+        "c2_service_area":   { "$ref": "#/$defs/criterion" },
+        "c3_timeline":       { "$ref": "#/$defs/criterion" },
+        "c4_budget":         { "$ref": "#/$defs/criterion" },
+        "c5_decision_maker": { "$ref": "#/$defs/criterion" }
+      }
+    },
+
+    "decision": { "enum": ["Book", "Ask", "Decline", "Escalate"] },
+
+    "reason_code": {
+      "enum": [
+        "qualified",
+        "advice_only",
+        "outside_service_area",
+        "out_of_scope_type",
+        "below_min_size",
+        "timeline_too_short",
+        "budget_misaligned",
+        "criteria_unclear",
+        "call_dropped",
+        "existing_client_complaint",
+        "existing_client_query",
+        "not_a_lead"
+      ]
+    },
+
+    "reason": { "type": "string", "description": "One plain-English sentence" },
+
+    "consultation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "slot_iso": { "type": ["string", "null"], "description": "ISO 8601 with +05:30 offset" },
+        "slot_text": { "type": ["string", "null"] },
+        "mode": { "enum": ["site_visit", "studio", "video", null] },
+        "attendees": { "type": ["string", "null"] },
+        "caller_constraints": { "type": ["string", "null"], "description": "e.g. 'weekdays after 6pm or weekends only'" }
+      }
+    },
+
+    "escalation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "urgency": { "enum": ["urgent", "normal"] },
+        "issue_summary": { "type": "string" },
+        "client_name": { "type": ["string", "null"] },
+        "project_location": { "type": ["string", "null"] },
+        "assigned_designer": { "type": ["string", "null"] },
+        "already_tried": { "type": ["string", "null"] },
+        "callback_requested_from": { "type": ["string", "null"], "description": "e.g. 'Nikhil or a senior person'" },
+        "promised_callback": { "type": ["string", "null"], "description": "What the agent promised, verbatim" }
+      }
+    },
+
+    "flags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "referral",
+          "vip_referral",
+          "pricing_asked",
+          "ai_disclosure_asked",
+          "human_callback_requested",
+          "repeat_caller_no_followup",
+          "frustrated_caller",
+          "acting_on_behalf",
+          "urgent_timeline",
+          "timeline_reset_by_caller",
+          "nurture_later",
+          "rented_property",
+          "structural_request",
+          "site_visit_requested",
+          "large_project",
+          "service_area_edge",
+          "language_switch",
+          "dropped_call",
+          "after_hours"
+        ]
+      }
+    },
+
+    "uncertainties": { "type": "array", "items": { "type": "string" } },
+
+    "designer_brief": { "type": ["string", "null"] },
+
+    "summary": { "type": ["string", "null"] }
+  },
+
+  "$defs": {
+    "criterion": {
+      "type": "object",
+      "required": ["result"],
+      "additionalProperties": false,
+      "properties": {
+        "result": { "enum": ["pass", "fail", "unclear", "not_assessed"] },
+        "evidence": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

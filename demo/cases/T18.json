@@ -1,0 +1,74 @@
+{
+  "id": "T18",
+  "source": "Aangan_Sep_2026_Enquiries.pdf · T18",
+  "note": "",
+  "expected": {
+    "decision": "Decline",
+    "criteria": [
+      "fail",
+      "unclear",
+      "unclear",
+      "pass",
+      "pass"
+    ]
+  },
+  "call": {
+    "started_at": "2026-09-23T11:55:00+05:30",
+    "duration_sec": 182,
+    "caller_number": "+91 90000 00018",
+    "answer_delay_sec": 3
+  },
+  "transcript": [
+    {
+      "role": "caller",
+      "text": "I run a small coworking space. A 180 sq ft pod I want to make look really nice."
+    },
+    {
+      "role": "agent",
+      "text": "Our commercial work is set up for full offices. A single pod is below the scale we can do well at the quality we'd promise."
+    }
+  ],
+  "agent_output": {
+    "schema_version": "1.0",
+    "language": "en",
+    "call_type": "new_enquiry",
+    "caller": {
+      "name": null,
+      "relationship_to_property": "founder_or_director",
+      "phone": "+91 90000 00018"
+    },
+    "project": {
+      "segment": "commercial",
+      "property_type": "coworking",
+      "carpet_area_sqft": 180,
+      "scope_summary": "Lighting, desk, storage for one pod",
+      "execution_wanted": true
+    },
+    "criteria": {
+      "c1_real_project": {
+        "result": "fail",
+        "evidence": "180 sq ft pod: below our minimum commercial scope"
+      },
+      "c2_service_area": {
+        "result": "unclear",
+        "evidence": "Not discussed"
+      },
+      "c3_timeline": {
+        "result": "unclear",
+        "evidence": "Not discussed"
+      },
+      "c4_budget": {
+        "result": "pass",
+        "evidence": "Not mentioned"
+      },
+      "c5_decision_maker": {
+        "result": "pass",
+        "evidence": "Owner of the space"
+      }
+    },
+    "decision": "Decline",
+    "reason_code": "below_min_size",
+    "reason": "180 sq ft coworking pod, below the ~500 sq ft commercial minimum.",
+    "flags": []
+  }
+}
